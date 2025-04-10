@@ -6,17 +6,17 @@
 #include "gamepad.hpp"
 #include "motor.hpp"
 
-const int32_t controller_max = 512;
-const int32_t controller_max_cube = controller_max * controller_max * controller_max;
+const float controller_max = 512;
+const float  controller_max_cube = controller_max * controller_max * controller_max;
 
-const int32_t motor_max = 2000;
-const int32_t motor_min = 800;
-const int32_t motor_start_movement = 200;
+const float motor_max = 2000;
+const float motor_min = 600;
+const float motor_start_movement = 200;
 
 const int32_t servo_max = 1024;
 
-int32_t to_motor_speed_cube(int32_t speed);
-int32_t to_motor_speed(int32_t speed);
+int32_t to_motor_speed_cube(float speed);
+int32_t to_motor_speed(float speed);
 
 void move_frame(ControllerPtr ctl);
 

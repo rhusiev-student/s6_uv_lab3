@@ -5,7 +5,7 @@ int32_t angle_horizontal = 90;
 uint8_t servo_delays_hor = servo_delays_initial;
 uint8_t servo_delays_ver = servo_delays_initial;
 
-int32_t to_motor_speed_cube(int32_t speed) {
+int32_t to_motor_speed_cube(float speed) {
   if (abs(speed) < 15) {
     return 0;
   }
@@ -17,7 +17,7 @@ int32_t to_motor_speed_cube(int32_t speed) {
   }
   return motor_speed;
 }
-int32_t to_motor_speed(int32_t speed) {
+int32_t to_motor_speed(float speed) {
   if (abs(speed) < 15) {
     return 0;
   }
@@ -100,11 +100,12 @@ void move_frame(ControllerPtr ctl) {
     rotate_frame(left_l, forward, pivot, pivot_sideways, rotate);
     return;
   }
+  forward = forward * 2 / 3;
   if (forward >= 0) {
-    if (left > 0) {
-      angle_horizontal = static_cast<int32_t>(std::atan2(forward, left));
+    if (left >= -15 && left <= 15) {
+      angle_horizontal = 90;
     } else {
-      angle_horizontal = static_cast<int32_t>(std::atan2(forward, left)) + 90;
+      angle_horizontal = static_cast<int32_t>(std::atan2(forward, left) / PI * 180);
     }
   } else if (forward < -15) {
     if (left > 0) {
